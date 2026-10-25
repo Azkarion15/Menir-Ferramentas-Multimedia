@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://azkarion15.github.io/Menir-Ferramentas-Multimedia/sitemap.xml
