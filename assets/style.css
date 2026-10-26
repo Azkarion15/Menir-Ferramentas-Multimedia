@@ -337,3 +337,39 @@ Tags: full-site-editing, block-patterns, block-styles, wide-blocks, accessibilit
 .logo-demo { width: 172px; max-width: 62%; margin: 1.6rem auto 0; }
 .logo-demo img { display: block; width: 100%; height: auto; }
 .logo-demo figcaption { margin-top: 0.8rem; text-align: center; }
+
+/* ----------------------------------------------------------------
+   Click water-ripple (Midnight palette: navy #0f1b33, gold #d4a853,
+   cream #f3ede0). Active only when <html> has .js-ripple, which the JS sets
+   when IntersectionObserver is available and motion is not reduced.
+   ---------------------------------------------------------------- */
+.js-ripple .menir-ripples {
+	position: fixed;
+	inset: 0;
+	overflow: hidden;
+	pointer-events: none;
+	z-index: 99999;
+}
+.menir-ripple {
+	position: absolute;
+	border-radius: 50%;
+	border: 3px solid rgba(212, 168, 83, 0.85);
+	background: radial-gradient(circle, rgba(212, 168, 83, 0.12) 0%, rgba(212, 168, 83, 0) 64%);
+	transform: translate(-50%, -50%) scale(0);
+	opacity: 0;
+	will-change: transform, opacity;
+}
+.js-ripple .menir-ripple.is-on {
+	animation: menirRipple 1s cubic-bezier(0.25, 0.6, 0.3, 1) forwards;
+}
+@keyframes menirRipple {
+	0%   { transform: translate(-50%, -50%) scale(0);    opacity: 0.75; }
+	100% { transform: translate(-50%, -50%) scale(1);    opacity: 0;    }
+}
+/* Reduced motion: never animate — ripples stay hidden. */
+@media (prefers-reduced-motion: reduce) {
+	.js-ripple .menir-ripple.is-on {
+		animation: none;
+		opacity: 0;
+	}
+}
